@@ -51,8 +51,8 @@ i18next
     .use(i18nextHttpBackend)
     .use(i18nextBrowserLanguageDetector)
     .init({
-        supportedLngs: ["en", "de", "es"],
-        fallbackLng: ["en"],
+        supportedLngs: ["en", "fr"],
+        fallbackLng: ["fr"],
         debug: true,
         backend: {
             loadPath: 'i18n/{{lng}}.json'

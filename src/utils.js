@@ -39,7 +39,14 @@ function sortedQuants(sortedArray, q) {
         return sortedArray[base];
     }
 }
-
+function extractStringInBrackets(str) {
+    let matches = str.match(/\[(.*?)\]/);
+    if (matches && matches.length > 1) {
+        return matches[1]; // The captured group within the brackets
+    } else {
+        return null; // No match found
+    }
+}
 /**
  * Returns the quantiles of data, value must be stored in properties.value for each feature of data.
  *

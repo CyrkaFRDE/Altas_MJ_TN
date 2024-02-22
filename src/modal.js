@@ -98,9 +98,11 @@ function createCatSelection (name) {
                 select_name = selector_values_after_sp_1[temporaryValues["map_type"]][temporaryValues["justice"]][name]["title"];
                 break;
         }
+
         cat_title.setAttribute("i18n", select_name);
         translatePage();
     }
+
 }
 
 function createPersonDiv (name, affil, photo, desc, socials) {
@@ -163,7 +165,7 @@ function displayModal(welcomeOrAboutUs) {
         // Cat selection
         content.innerHTML += '<div class="cats"><div class="line-wrapper"><hr class="line"><div class="cat-title"></div></div><div class="cat-selection"></div></div>';
         createCatSelection("map_type");
-    } else {
+    } /*else {
         // About
         content.innerHTML = '<p i18n="about_us"></p>'
         + '<div class="people">'
@@ -219,15 +221,15 @@ function displayModal(welcomeOrAboutUs) {
                 "fa fa-envelope": "mailto:hector.ochoa@tum.de"
             }
         ));
-    }
+    }*/
     modal_about.style.display = "block";
     translatePage();
 }
 
 // When About button is clicked, show About modal
-about_us_btn.onclick = (event) => {
+/*about_us_btn.onclick = (event) => {
     displayModal(false);
-}
+}*/
 
 // When X button is clicked, close the modal
 span.onclick = function() {

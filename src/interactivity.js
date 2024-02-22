@@ -36,7 +36,6 @@ function onEachFeature(feature, layer) {
     });
 }
 
-
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -47,7 +46,6 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-
     if (selected_values["map_type"] == "summ") {
         this._div.innerHTML = '<h4><span i18n="click"></span></h4>';
     } else {
@@ -59,19 +57,18 @@ info.update = function (props) {
         if (X == "income") X = "inc";
 
         this._div.innerHTML += (props
-            ? '<b>' + props.name + '</b><br /><span i18n="' + selected_values["amenity"] + '"></span> ' + props['value_' + X].toFixed(2) + '&nbsp;<span i18n="' + props['value_desc_' + X] + '"></span> (<span i18n="' + props['hilo_' + X] + '"></span>)<br /><span i18n="' + selected_values["v1"] + '"></span> ' + props.value_pop.toFixed(2) + '&nbsp;<span i18n="' + props['value_desc_pop'] + '"></span> (<span i18n="' + props.hilo_pop + '"></span>)'
+            ? '<b>' + props.Delegation + '</b><br /><span i18n="' + selected_values["amenity"] + '"></span> ' + props['Mob'].toFixed(2)  +' ('+ props['Unit_mobil'] +')'+'&nbsp;<br /><span i18n="' + selected_values["v1"] + '"></span> ' + props.Social.toFixed(2) +' ('+ props['Unit_social'] +')</span> '
             : '');
     } else {
         this._div.innerHTML += (props
-            ? '<b>' + props.name + '</b><br />' + props.value.toFixed(2) + '&nbsp;<span i18n="' + props.value_desc + '"></span>'
+            ? '<b>' + props.Delegation + '</b><br />' + props.Value.toFixed(2)  +' ('+ props['Unit'] +')'+ '&nbsp;<span i18n="'  + '"></span>'
             : '');
     }
-
-
     translatePage();
 };
 
 info.addTo(map);
+
 
 // Add scale
 var scale = L.control.scale({ metric: true, imperial: false }).addTo(map);

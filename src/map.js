@@ -6,10 +6,8 @@
  * Last update: 2023-05-03                       *
  *************************************************/
 
-
 // Create map
-const map = L.map('map').setView([48.14, 11.57], 11);
-
+const map = L.map('map').setView([36.8, 10.05], 11);
 // Add background layer
 const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -17,6 +15,7 @@ const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{
     maxZoom: 20,
     minZoom: 0
 }).addTo(map);
+
 
 // Add selector and button
 const map_type = document.querySelector('#map_type');
@@ -35,6 +34,43 @@ var biv;
 const download = document.querySelector('#download');
 var legend;
 
+
+function selectFeatureByProperty(geojson, propertyName) {
+    // Create a new GeoJSON structure
+    var newGeoJson = {
+        "type": "FeatureCollection",
+        "features": geojson.features.map(feature => ({
+            "type": "Feature",
+            "geometry": feature.geometry,
+            "properties": {
+                // Include only the specified property
+                 "Value": feature.properties[propertyName],
+                "Delegation": feature.properties.alt_name_f,
+                "Unit": extractStringInBrackets(propertyName)
+            }
+        }))
+    };
+    return newGeoJson;
+}
+function selectFeaturesWithTwoProperties(geojson, firstPropertyName, secondPropertyName) {
+    var newGeoJson = {
+        "type": "FeatureCollection",
+        "features": geojson.features.map(feature => ({
+            "type": "Feature",
+            "geometry": feature.geometry,
+            "properties": {
+                // Include only the specified properties
+                ["Mob"]: feature.properties[firstPropertyName],
+                ["Social"]: feature.properties[secondPropertyName],
+                "Unit_social": extractStringInBrackets(firstPropertyName),
+                "Unit_mobil": extractStringInBrackets(secondPropertyName),
+                "Delegation": feature.properties.alt_name_f
+            }
+        }))
+    };
+    return newGeoJson;
+}
+
 // When selector value is clicked
 function changeMap() {
     selected_values = {
@@ -44,7 +80,6 @@ function changeMap() {
         "amenity": getValue("amenity"),
         "mot": getValue("mot")
     }
-
     info.update();
 
     // Remove layers if already displayed
@@ -62,132 +97,239 @@ function changeMap() {
     }
 
     generateLegend("", true);
+    switch (selected_values["map_type"]) {
+        case "sg":
+            var propertyName;
+            if ( selected_values["justice"] == "tp" ) {//CYRINE
+                propertyName="Population [nb]";
 
-    //Connect to Geoserver WFS
-    if (selected_values["map_type"] == "diff_sg") {
-        callGeoServer(
-            "divergent",
-            { "filter1": selected_values["v1"], "filter2": selected_values["mot"] },
-            handleJsonDiv
-        );
-    } else if (selected_values["map_type"] == "summ") {
-        callGeoServer(
-            "all_normalized",
-            {},
-            handleJsonRadar
-        );
-    } else {
-        switch (selected_values["justice"]) {
-            case "acc":
-                if (selected_values["map_type"] == "ji") {
-                    callGeoServer(
-                        "acc_all",
-                        { "user": selected_values["v1"], "amenity": selected_values["amenity"], "mot": selected_values["mot"] },
-                        handleJsonSeq
-                    );
-                } else {
-                    callGeoServer(
-                        "acc_hilo",
-                        { "user": selected_values["v1"], "amenity": selected_values["amenity"], "mot": selected_values["mot"] },
-                        handleJsonBiv
-                    );
-                }
+            }
+            else if (selected_values["justice"] == "o60" ) {//CYRINE
+                propertyName="Older people [%]";
+            }
+            else if ( selected_values["justice"] == "un" ) {//CYRINE
+                propertyName=" Unemployed [%]";
 
-                callGeoServer(
-                    "pois",
-                    { "amenity": selected_values["amenity"] },
-                    handleJsonPOIs
-                );
+            }
+            else if ( selected_values["justice"] == "income" ) {//CYRINE
+                propertyName="Poverty rate [%]";
+            }
+            else if ( selected_values["justice"] == "u9" ) {//CYRINE
+                propertyName="Children [%]";
+            }
+            else if ( selected_values["justice"] == "u19" ) {//CYRINE
+                propertyName="Teenagers [%]";
+            }
+            else if ( selected_values["justice"] == "nc" ) {//CYRINE
+                propertyName=" Population with no access to car [%]";
+            }
+            else if ( selected_values["justice"] == "imm" ) {//CYRINE
+                propertyName="Intrant migrant between 2009 et 2014 [%]";
+            }
+            if (propertyName) {
+                if(sg_geojson == null || sg_geojson === 'undefined'){
+                    mergeGeoJSONandCSV(jsonFilePath_map, csvFilePathsg)
+                        .then(mergedGeoJSON => {
+                            // Do something with the merged GeoJSON
+                            sg_geojson= mergedGeoJSON;
+                            handleJsonSeq(selectFeatureByProperty(sg_geojson, propertyName),propertyName)
+                        });
+                }
+                else{
+                handleJsonSeq(selectFeatureByProperty(sg_geojson, propertyName),propertyName)}
+            }
+            break;
+        case "ji":
+            var propertyName_ji;
+            if (  selected_values["amenity"] == "h" ) {//CYRINE
+                propertyName_ji="1Km proximity to Health [% population covered] ";
+            }
+            else if (  selected_values["amenity"] == "s" ) {//CYRINE
+                propertyName_ji="1Km proximity to Sport [% population covered] ";
 
-                callGeoServer(
-                    "service_areas",
-                    { "amenity": selected_values["amenity"], "mot": selected_values["mot"] },
-                    handleJsonAreas
-                );
+            }
+            else if ( selected_values["amenity"] == "f" ) {//CYRINE
+                propertyName_ji="1Km proximity to Food [% build up area covered] ";
+            }
+            else if (selected_values["amenity"] == "a" ) {//CYRINE
+                propertyName_ji="1Km proximity to Administration [% build up area covered] ";
 
-                break;
+            }
+            else if (  selected_values["amenity"] == "e1" ) {//CYRINE
+                propertyName_ji="1Km proximity to school [% population covered] ";
 
-            case "exp":
-                if (selected_values["map_type"] == "ji") {
-                    callGeoServer(
-                        "exposure",
-                        { "type": selected_values["v1"] },
-                        handleJsonSeq
-                    );
+
+            }
+            else if ( selected_values["amenity"] == "e2" ) {//CYRINE
+                propertyName_ji="1Km proximity to elementary or highschool [% population covered] ";
+
+            }
+            else if ( selected_values["amenity"] == "g" ) {//CYRINE
+                propertyName_ji="1Km proximity to Green space [% build up area covered] ";
+            }
+
+            else if (  selected_values["v1"] == "accidents" ) {//CYRINE
+                propertyName_ji="Accidents [Nb/ha] (Build up area)";
+
+            }
+            else if (   selected_values["v1"] == "acc_pt" ) {//CYRINE
+                propertyName_ji="700m proximity to PT [% build up area covered] ";
+            }
+            else if ( selected_values["v1"] == "intersection_density" ) {//CYRINE
+                propertyName_ji="Intersection [nb /ha] (Build up area)";
+            }
+            else if (  selected_values["v1"] == "road_density" ) {//CYRINE
+                propertyName_ji="Road density [km/ha] (Total area)";
+            }
+
+            else if (  selected_values["v1"] == "pt_frequ" ) {//CYRINE
+                propertyName_ji="Frequency PT [min]";
+            }
+            else if ( selected_values["v1"] == "dur_15_30" ) {//CYRINE
+                propertyName_ji="Commuting for 15-30 min [% active pop covered]";
+            }
+            else if (   selected_values["v1"] == "dur_30" ) {//CYRINE
+                propertyName_ji="Commuting for >30 min [% active pop covered]";
+            }
+
+            else if ( selected_values["v1"] == "pt_usage" ) {//CYRINE
+                propertyName_ji="PT for commuting [%active  pop covered]"}
+            else if ( selected_values["v1"] == "irr_pt_usage" ) {//CYRINE
+                propertyName_ji="Irregular transport for commuting [%active  pop covered]"}
+
+            else if ( selected_values["v1"] == "walk_usage" ) {//CYRINE
+                propertyName_ji="Walking for commuting [%active  pop covered]"}
+
+            else if ( selected_values["v1"] == "car_usage" ) {//CYRINE
+                propertyName_ji="Car for commuting [%active  pop covered]"}
+
+            if (propertyName_ji) {
+                console.log(propertyName_ji)
+                if(ji_geojson == null || ji_geojson === 'undefined'){
+                    mergeGeoJSONandCSV(jsonFilePath_map, csvFilePathji)
+                        .then(mergedGeoJSON => {
+                            // Do something with the merged GeoJSON
+                            ji_geojson= mergedGeoJSON;
+                            handleJsonSeq(selectFeatureByProperty(ji_geojson, propertyName_ji),propertyName_ji)
+                        });
+                }
+                else{
+                    handleJsonSeq(selectFeatureByProperty(ji_geojson, propertyName_ji),propertyName_ji)}
+            }
+            break;
+        case "ji_v_sg":
+            var propertyName;
+            var propertyName_ji;
+            if ( selected_values["v1"] == "tp" ) {//CYRINE
+                propertyName="Population [nb]";
+
+            }
+            else if (selected_values["v1"] == "o60" ) {//CYRINE
+                propertyName="Older people [%]";
+            }
+            else if ( selected_values["v1"] == "un" ) {//CYRINE
+                propertyName=" Unemployed [%]";
+            }
+            else if ( selected_values["v1"] == "income" ) {//CYRINE
+                propertyName="poverty rate";
+            }
+            else if ( selected_values["v1"] == "u9" ) {//CYRINE
+                propertyName="Children [%]";
+            }
+            else if ( selected_values["v1"] == "u19" ) {//CYRINE
+                propertyName="Teenagers [%]";
+            }
+            else if ( selected_values["v1"] == "nc" ) {//CYRINE
+                propertyName=" Population with no access to car [%]";
+            }
+            else if ( selected_values["v1"] == "imm" ) {//CYRINE
+                propertyName="Intrant migrant between 2009 et 2014 [%]";
+            }
+            if (  selected_values["amenity"] == "h" ) {//CYRINE
+                propertyName_ji="1Km proximity to Health [% population covered] ";
+            }
+            else if (  selected_values["amenity"] == "s" ) {//CYRINE
+                propertyName_ji="1Km proximity to Sport [% population covered] ";
+
+            }
+            else if ( selected_values["amenity"] == "f" ) {//CYRINE
+                propertyName_ji="1Km proximity to Food [% build up area covered] ";
+            }
+            else if (selected_values["amenity"] == "a" ) {//CYRINE
+                propertyName_ji="1Km proximity to Administration [% build up area covered] ";
+
+            }
+            else if (  selected_values["amenity"] == "e1" ) {//CYRINE
+                propertyName_ji="1Km proximity to school [% population covered] ";
+
+
+            }
+            else if ( selected_values["amenity"] == "e2" ) {//CYRINE
+                propertyName_ji="1Km proximity to elementary or highschool [% population covered] ";
+
+            }
+            else if ( selected_values["amenity"] == "g" ) {//CYRINE
+                propertyName_ji="1Km proximity to Green space [% build up area covered] ";
+            }
+
+            else if (  selected_values["amenity"] == "accidents" ) {//CYRINE
+                propertyName_ji="Accidents [Nb/ha] (Build up area)";
+
+            }
+            else if (   selected_values["amenity"] == "acc_pt" ) {//CYRINE
+                propertyName_ji="700m proximity to PT [% build up area covered] ";
+            }
+            else if ( selected_values["amenity"] == "intersection_density" ) {//CYRINE
+                propertyName_ji="Intersection [nb /ha] (Build up area)";
+            }
+            else if (  selected_values["amenity"] == "road_density" ) {//CYRINE
+                propertyName_ji="Road density [km/ha] (Total area)";
+            }
+
+            else if (  selected_values["amenity"] == "pt_frequ" ) {//CYRINE
+                propertyName_ji="Frequency PT";
+            }
+
+            else if ( selected_values["amenity"] == "dur_15" ) {//CYRINE
+                propertyName_ji="Commuting for <15 min [% active pop covered]";
+            }
+            else if ( selected_values["amenity"] == "dur_15_30" ) {//CYRINE
+                propertyName_ji="Commuting for 15-30 min [% active pop covered]";
+            }
+            else if (   selected_values["amenity"] == "dur_30" ) {//CYRINE
+                propertyName_ji="Commuting for >30 min [% active pop covered]";
+            }
+
+            else if ( selected_values["amenity"] == "pt_usage" ) {//CYRINE
+                propertyName_ji="PT for commuting [%active  pop covered]"}
+            else if ( selected_values["amenity"] == "irr_pt_usage" ) {//CYRINE
+                propertyName_ji="Irregular transport for commuting [%active  pop covered]"}
+
+            else if ( selected_values["amenity"] == "walk_usage" ) {//CYRINE
+                propertyName_ji="Walking for commuting [%active  pop covered]"}
+
+            else if ( selected_values["amenity"] == "car_usage" ) {//CYRINE
+                propertyName_ji="Car for commuting [%active  pop covered]"}
+            if (propertyName_ji && propertyName) {
+
+                if (bi_geojson == null || bi_geojson === 'undefined') {
+                    mergeGeoJSONandCSV2(jsonFilePath_map, csvFilePathji,csvFilePathsg)
+                        .then(mergedGeoJSON => {
+                            // Do something with the merged GeoJSON
+                            bi_geojson = mergedGeoJSON;
+                            handleJsonBiv(selectFeaturesWithTwoProperties(bi_geojson, propertyName_ji, propertyName))
+                        });
                 } else {
-                    callGeoServer(
-                        "exposure_hilo",
-                        { "user": selected_values["v1"], "type": selected_values["amenity"] },
-                        handleJsonBiv
-                    );
+                    handleJsonBiv(selectFeaturesWithTwoProperties(bi_geojson, propertyName_ji, propertyName))
                 }
-                break;
-            case "ava":
-                if (selected_values["map_type"] == "ji") {
-                    callGeoServer(
-                        "availability",
-                        { "type": selected_values["v1"] },
-                        handleJsonSeq
-                    );
-                } else {
-                    callGeoServer(
-                        "availability_hilo",
-                        { "user": selected_values["v1"], "type": selected_values["amenity"] },
-                        handleJsonBiv
-                    );
-                }
-                break;
-            case "beh":
-                if (selected_values["map_type"] == "ji") {
-                    callGeoServer(
-                        "behaviour",
-                        { "type": selected_values["v1"] },
-                        handleJsonSeq
-                    );
-                } else {
-                    callGeoServer(
-                        "behaviour_hilo",
-                        { "user": selected_values["v1"], "type": selected_values["amenity"] },
-                        handleJsonBiv
-                    );
-                }
-                break;
-            case "income":
-                if (selected_values["map_type"] == "sg") {
-                    callGeoServer(
-                        "income",
-                        {},
-                        handleJsonSeq
-                    );
-                } else {
-                    callGeoServer(
-                        "income_hilo",
-                        {},
-                        handleJsonBiv
-                    );
-                }
-                break;
-            //case "pop":
-            case "tp":
-            case "o65":
-            case "u18":
-            case "ng":
-            case "un":
-            case "sp":
-                if (selected_values["map_type"] == "sg") {
-                    callGeoServer(
-                        "population",
-                        //{ "user": selected_values["v1"] },
-                        { "user": selected_values["justice"] },
-                        handleJsonSeq
-                    );
-                }
-                break;
-            default:
-                break;
-        }
+            }
     }
-};
+
+}
+
+
+
+
 
 // Update map size after menu transition
 document.getElementById('navbar-left').addEventListener('change', function() {

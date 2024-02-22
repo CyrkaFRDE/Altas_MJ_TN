@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 	<base target="_top">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<title id="title", i18n="title"></title>
-	
+
 	<link rel="shortcut icon" type="image/x-icon" href="https://www.tum.de/typo3conf/ext/in2template/Resources/Public/Images/Icons/favicons/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
@@ -20,6 +20,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/i18next@22.4.10/i18next.min.js" integrity="sha256-HhbcQm9uCk1XKzYb8wgO1aAW+Wcdh14ITlBggCy7lDk=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@2.1.1/i18nextHttpBackend.min.js" integrity="sha256-PEd69ii7lMPlO/bO8tpxaVjLXXkD+r9aejg8nFAcue4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/i18next-browser-languagedetector@7.0.1/i18nextBrowserLanguageDetector.min.js" integrity="sha256-5O8laLCvkg/QnkOa0yIzvZ7RcJgT4nSG6/gdbudcTGg=" crossorigin="anonymous"></script>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.1/papaparse.min.js"></script>
+
 
 	<!-- Social buttons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -73,15 +77,15 @@
 							&#x1F6C8;
 							<span class="info-tooltip" i18n="desc_diff_sg"></span>
 						</div>
-					</div>-->
+					</div>
 					<div class="select-option">
 						<input type="radio" name="map_type" id="summ" value="summ">
 						<label for="summ" i18n="summ"></label>
 						<div class="select-title-info">
 							&#x1F6C8;
 							<span class="info-tooltip" i18n="desc_summ"></span>
-						</div>
-					</div>
+						</div>.
+					</div>-->
 				</div>
 			</div>
 			<div class="select-main" id="sp-1" style="display: none;">
@@ -98,6 +102,7 @@
 				<div class="select-options" id="amenity">
 				</div>
 			</div>
+
 			<div class="select-main" id="sp-4" style="display: none;">
 				<input type="checkbox">
 				<div class="select-title-text" i18n="select"></div>
@@ -122,7 +127,6 @@
 				<span class="visually-hidden">TUM</span>
 
 				<span class="desktop-show" i18n="header"></span>
-				<img style="height: 42px;" src="https://www.mcube-cluster.de/wp-content/themes/mcube-theme-wip/frontend/img/mcube_logo_simple.svg" alt="MCube Cluster">
 			</a>
 			<div class="title"><h1 i18n="title"></h1></div>
 		</div>
@@ -144,14 +148,13 @@
 <footer>
 	<a href="#" id="download" i18n="download"></a>
 	<a href="#" id="share" i18n="share"></a>
-	<a href="#" id="about_us" i18n="about_us"></a>
+	<!--<a href="#" id="about_us" i18n="about_us"></a>-->
 	<select data-i18n-switcher class="locale-switcher">
 		<option value="en">English</option>
-		<option value="de">Deutsch</option>
-		<option value="es">Español</option>
+		<option value="fr">French</option>
 	</select>
 </footer>
-
+<script src="src/data.js"></script>
 <script src="src/i18n.js"></script>
 <script src="src/utils.js"></script>
 <script src="src/geoserver.js"></script>

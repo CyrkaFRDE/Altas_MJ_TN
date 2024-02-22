@@ -5,9 +5,8 @@
  * Affil.: TUM SVP                   *
  *************************************/
 
-function handleJsonSeq(data) {
+function handleJsonSeq(data,name) {
     biv = false;
-
     // Add data to download button
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
     download.setAttribute("href", dataStr);
@@ -20,7 +19,7 @@ function handleJsonSeq(data) {
     }
 
     // Generate quantiles
-    var quants = getQuants(data, "value");
+    var quants = getQuants(data,"Value");
     
     // Generate style from quantiles
     function getColor(d) {
@@ -29,22 +28,24 @@ function handleJsonSeq(data) {
                 d > quants["Q1"] ? '#fdcc8a' :
                 '#fef0d9';
     }
+    console.log(quants)
 
+
+    var unit= extractStringInBrackets(name);
     function style(feature) {
         return {
-            fillColor: getColor(feature.properties.value),
+            fillColor: getColor(feature.properties["Value"]),
             weight: 0.5,
             opacity: 1,
             color: '#1a1a1a',
             fillOpacity: 0.7
         };
     }
-
     // legend
     let grades = [quants["Q0"], quants["Q1"], quants["Q2"], quants["Q3"], quants["Q4"]];
-    var legend_text = '<h4><span i18n="' + (selected_values["map_type"] == "sg" ? selected_values["justice"] : selected_values["v1"]) + '"></span> [<span i18n="' + data.features[0].properties.value_desc + '"></span>]'+ (selected_values["justice"] == "acc" ? ', <span i18n="' + selected_values["amenity"] + '"></span>, <span i18n="' + selected_values["mot"] + '"></span>' : '') + '</h4>';
+    var legend_text = '<h4><span i18n="' + (selected_values["map_type"] == "sg" ? selected_values["justice"] : (selected_values["justice"] == "acc" ?  selected_values["amenity"]:selected_values["v1"])) + '"></span> [<span i18n="' + unit + '"></span>]'+  '</h4>';
 
-    // loop through our density intervals and generate a label with a colored square for each interval
+   // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length - 1; i++) {
         legend_text +=
             '<i class="square" style="background:' + getColor((grades[i] + grades[i + 1]) / 2.0) + '" ></i> ' +
@@ -54,6 +55,8 @@ function handleJsonSeq(data) {
 
     // add legend to map
     generateLegend(legend_text, false);
+
+
 
     // Add layer to map
     polygonLayer = L.geoJson(data, {

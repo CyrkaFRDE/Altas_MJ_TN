@@ -71,10 +71,7 @@ var selector_values_before_sp_0 = [
         "value": "diff_sg",
         "desc": "desc_diff_sg"
     },*/
-    {
-        "value": "summ",
-        "desc": "desc_summ"
-    }
+
 ]
 
 // Selector values
@@ -87,15 +84,16 @@ var selector_values_after_sp_0 = {
                 "desc": "desc"
             },
             {
-                "value": "o65",
+                "value": "o60",
                 "desc": "desc"
             },
             {
-                "value": "u18",
+                "value": "u9",
                 "desc": "desc"
             },
+
             {
-                "value": "ng",
+                "value": "u19",
                 "desc": "desc"
             },
             {
@@ -103,11 +101,15 @@ var selector_values_after_sp_0 = {
                 "desc": "desc"
             },
             {
-                "value": "sp",
+                "value": "imm",
                 "desc": "desc"
             },
             {
                 "value": "income",
+                "desc": "desc"
+            },
+            {
+                "value": "nc",
                 "desc": "desc"
             }
         ]
@@ -131,6 +133,11 @@ var selector_values_after_sp_0 = {
                 "value": "acc",
                 "desc": "desc"
             }
+            ,
+            {
+                "value": "temp",
+                "desc": "desc"
+            }
         ]
     },
     "ji_v_sg": {
@@ -151,6 +158,11 @@ var selector_values_after_sp_0 = {
             },
             {
                 "value": "acc",
+                "desc": "desc"
+            }
+            ,
+            {
+                "value": "temp",
                 "desc": "desc"
             }
         ]
@@ -168,34 +180,12 @@ var selector_values_after_sp_0 = {
                 "desc": "desc"
             }
         ]
-    },
-    "summ": {}
+    }
 }
 var selector_values_after_sp_1 = {
     "sg": {},
     "ji": {
         "acc": {
-            "v1": {
-                "title": "select_sg",
-                "values": [
-                    {
-                        "value": "tp",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "o65",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "u18",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "ng",
-                        "desc": "desc"
-                    }
-                ]
-            },
             "amenity": {
                 "title": "select_amenity",
                 "values": [
@@ -204,7 +194,11 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "e",
+                        "value": "e1",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "e2",
                         "desc": "desc"
                     },
                     {
@@ -216,24 +210,12 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "cc",
+                        "value": "a",
                         "desc": "desc"
                     }
-                ]
-            },
-            "mot": {
-                "title": "select_mot",
-                "values": [
+                    ,
                     {
-                        "value": "w_700",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "b_700",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "wpt_700",
+                        "value": "g",
                         "desc": "desc"
                     }
                 ]
@@ -245,14 +227,6 @@ var selector_values_after_sp_1 = {
                 "values": [
                     {
                         "value": "accidents",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "noise",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "pollution",
                         "desc": "desc"
                     }
                 ]
@@ -267,7 +241,7 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "cycleway_density",
+                        "value": "road_density",
                         "desc": "desc"
                     },
                     {
@@ -282,7 +256,7 @@ var selector_values_after_sp_1 = {
                 "title": "select_beh",
                 "values": [
                     {
-                        "value": "bike_usage",
+                        "value": "car_usage",
                         "desc": "desc"
                     },
                     {
@@ -290,16 +264,37 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "walk_usage",
+                        "value": "irr_pt_usage",
                         "desc": "desc"
                     },
                     {
-                        "value": "car_sharing_usage",
+                        "value": "walk_usage",
+                        "desc": "desc"
+                    }
+                ]
+            }
+        },
+        "temp": {
+            "v1": {
+                "title": "select_temp",
+                "values": [
+                    {
+                        "value": "pt_frequ",
+                        "desc": "desc"
+                    }
+                    ,
+                    {
+                        "value": "dur_15_30",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "dur_30",
                         "desc": "desc"
                     }
                 ]
             }
         }
+
     },
     "ji_v_sg": {
         "acc": {
@@ -311,15 +306,31 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "o65",
+                        "value": "o60",
                         "desc": "desc"
                     },
                     {
-                        "value": "u18",
+                        "value": "u9",
                         "desc": "desc"
                     },
                     {
-                        "value": "ng",
+                        "value": "u19",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "un",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "imm",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "income",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "nc",
                         "desc": "desc"
                     }
                 ]
@@ -332,7 +343,11 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "e",
+                        "value": "e1",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "e2",
                         "desc": "desc"
                     },
                     {
@@ -344,24 +359,11 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "cc",
-                        "desc": "desc"
-                    }
-                ]
-            },
-            "mot": {
-                "title": "select_mot",
-                "values": [
-                    {
-                        "value": "w_700",
+                        "value": "a",
                         "desc": "desc"
                     },
                     {
-                        "value": "b_700",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "wpt_700",
+                        "value": "g",
                         "desc": "desc"
                     }
                 ]
@@ -376,15 +378,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "o65",
+                        "value": "o60",
                         "desc": "desc"
                     },
                     {
-                        "value": "u18",
+                        "value": "u9",
                         "desc": "desc"
                     },
                     {
-                        "value": "ng",
+                        "value": "u19",
                         "desc": "desc"
                     },
                     {
@@ -392,7 +394,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "sp",
+                        "value": "imm",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "income",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "nc",
                         "desc": "desc"
                     }
                 ]
@@ -402,14 +412,6 @@ var selector_values_after_sp_1 = {
                 "values": [
                     {
                         "value": "accidents",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "noise",
-                        "desc": "desc"
-                    },
-                    {
-                        "value": "pollution",
                         "desc": "desc"
                     }
                 ]
@@ -424,15 +426,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "o65",
+                        "value": "o60",
                         "desc": "desc"
                     },
                     {
-                        "value": "u18",
+                        "value": "u9",
                         "desc": "desc"
                     },
                     {
-                        "value": "ng",
+                        "value": "u19",
                         "desc": "desc"
                     },
                     {
@@ -440,7 +442,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "sp",
+                        "value": "imm",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "income",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "nc",
                         "desc": "desc"
                     }
                 ]
@@ -453,7 +463,7 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "cycleway_density",
+                        "value": "road_density",
                         "desc": "desc"
                     },
                     {
@@ -472,15 +482,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "o65",
+                        "value": "o60",
                         "desc": "desc"
                     },
                     {
-                        "value": "u18",
+                        "value": "u9",
                         "desc": "desc"
                     },
                     {
-                        "value": "ng",
+                        "value": "u19",
                         "desc": "desc"
                     },
                     {
@@ -488,7 +498,15 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "sp",
+                        "value": "imm",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "income",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "nc",
                         "desc": "desc"
                     }
                 ]
@@ -497,7 +515,7 @@ var selector_values_after_sp_1 = {
                 "title": "select_beh",
                 "values": [
                     {
-                        "value": "bike_usage",
+                        "value": "car_usage",
                         "desc": "desc"
                     },
                     {
@@ -505,16 +523,74 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "walk_usage",
+                        "value": "irr_pt_usage",
                         "desc": "desc"
                     },
                     {
-                        "value": "car_sharing_usage",
+                        "value": "walk_usage",
+                        "desc": "desc"
+                    }
+                ]
+            }
+        },
+        "temp": {
+            "v1": {
+                "title": "select_sg",
+                "values": [
+                    {
+                        "value": "tp",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "o60",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "u9",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "u19",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "un",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "imm",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "income",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "nc",
+                        "desc": "desc"
+                    }
+                ]
+            },
+            "amenity": {
+                "title": "select_temp",
+                "values": [
+                    {
+                        "value": "pt_frequ",
+                        "desc": "desc"
+                    }
+                    ,
+                    {
+                        "value": "dur_15_30",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "dur_30",
                         "desc": "desc"
                     }
                 ]
             }
         }
+
     },
     "diff_sg": {
         "ava": {
@@ -595,7 +671,7 @@ var selector_values_after_sp_1 = {
                 "title": "select_mot",
                 "values": [
                     {
-                        "value": "auto_usage",
+                        "value": "car_usage",
                         "desc": "desc"
                     },
                     {
@@ -603,18 +679,39 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     },
                     {
-                        "value": "bicycle_usage",
+                        "value": "irr_pt_usage",
                         "desc": "desc"
                     },
                     {
-                        "value": "car_sharing_usage",
+                        "value": "walk_usage",
                         "desc": "desc"
                     }
                 ]
             }
         }
-    },
-    "summ": {}
+        ,
+        "temp": {
+            "v1": {
+                "title": "select_temp",
+                "values": [
+                    {
+                        "value": "pt_frequ",
+                        "desc": "desc"
+                    }
+                    ,
+                    {
+                        "value": "dur_15",
+                        "desc": "desc"
+                    },
+                    {
+                        "value": "dur_30",
+                        "desc": "desc"
+                    }
+                ]
+            }
+        }
+
+    }
 }
 
 var selected_values;
