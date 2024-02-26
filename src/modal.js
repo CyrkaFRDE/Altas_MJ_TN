@@ -174,54 +174,6 @@ function displayModal(welcomeOrAboutUs) {
 
         translatePage();
     }
-    /*
-            let authors = content.querySelector('#atlas-authors');
-            authors.appendChild(createPersonDiv(
-                "David Durán",
-                "tum",
-                "img/david.jpg",
-                "desc_david",
-                {
-                    "fab fa-linkedin": "https://www.linkedin.com/in/david-duran-55336916b",
-                    "fa fa-envelope": "mailto:david.duran@tum.de"
-                }
-            ));
-            authors.appendChild(createPersonDiv(
-                "Sindi Haxhija",
-                "tum",
-                "img/sindi.jpg",
-                "desc_sindi",
-                {
-                    "fab fa-linkedin": "https://www.linkedin.com/in/sindi-haxhija-8a018377/",
-                    "fa fa-envelope": "mailto:sindi.haxhija@tum.de"
-                }
-            ));
-            authors.appendChild(createPersonDiv(
-                "María Teresa Baquero",
-                "upm",
-                "img/maite.jpg",
-                "desc_maite",
-                {
-                    "fab fa-linkedin": "https://www.linkedin.com/in/mar%C3%ADa-teresa-baquero-larriva-42112157/",
-                    "fa fa-envelope": "mailto:maite.baquero@tum.de"
-                }
-            ));
-
-
-            let developer = content.querySelector('#atlas-developer');
-            developer.appendChild(createPersonDiv(
-                "Héctor Ochoa‑Ortiz",
-                "unicam",
-                "img/hector.jpg",
-                "desc_hector",
-                {
-                    "fab fa-linkedin": "https://www.linkedin.com/in/hector-ochoa-ortiz",
-                    "fab fa-github": "https://github.com/Robot8A",
-                    "fa fa-globe": "https://pros.unicam.it/members/",
-                    "fa fa-envelope": "mailto:hector.ochoa@tum.de"
-                }
-            ));
-        }*/
     modal_about.style.display = "block";
     translatePage();
 }
