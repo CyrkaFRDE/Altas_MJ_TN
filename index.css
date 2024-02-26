@@ -674,11 +674,6 @@ footer {
     margin-left: auto;
 }
 
-
-.bullet a:hover {
-    text-decoration: underline; /* Optional: Adds underline on hover */
-}
-
 .close {
     color: #aaa;
     float: right;
