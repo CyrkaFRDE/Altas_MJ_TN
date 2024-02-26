@@ -333,7 +333,20 @@ div.select-title-info:hover>span.info-tooltip {
     order: 1;
     display: flex;
 }
-
+.logo {
+    order: 0;
+    font-size: 0.75rem;
+    align-items: center;
+    color: inherit !important;
+    -moz-column-gap: 0.75rem;
+    column-gap: 0.75rem;
+    display: flex;
+    -webkit-padding-after: 1.25rem;
+    padding-block-end: 1.25rem;
+    -webkit-padding-before: 1.25rem;
+    padding-block-start: 1.25rem;
+    text-decoration: none !important;
+}
 @media (max-width: 450px) {    
     h1 {
         font-size: 1.2em;
