@@ -2,6 +2,7 @@
 const jsonFilePath_map = './data/map_delegation.geojson';
 const csvFilePathsg = './data/Social_disadvantage.csv';
 const csvFilePathji = './data/geojson_transport_disa.csv';
+const csvradar = './data/Radar.csv';
 
 async function mergeGeoJSONandCSV(geojsonPath, csvPath) {
     // Load and parse the GeoJSON file
@@ -108,3 +109,10 @@ mergeGeoJSONandCSV(jsonFilePath_map, csvFilePathsg)
         sg_geojson= mergedGeoJSON;
     });
 
+
+var radar_geojson;
+mergeGeoJSONandCSV(jsonFilePath_map, csvradar)
+    .then(mergedGeoJSON => {
+        // Do something with the merged GeoJSON
+        radar_geojson= mergedGeoJSON;
+    });

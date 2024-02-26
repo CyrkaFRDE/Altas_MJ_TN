@@ -8,27 +8,25 @@
 
 var currentLayer;
 
-let labels = [
-  "value_h",
-  "value_e",
-  "value_f",
-  "value_s",
-  "value_cc",
-  "value_acc_pt",
-  "value_cycleway_density",
-  "value_intersection_density",
-  "value_walk_usage",
-  "value_car_sharing_usage",
-  "value_bike_usage",
-  "value_pt_usage",
-  "value_accidents",
-  "value_noise",
-  "value_pollution",
-  "value_income",
-  "value_tp",
-  "value_u18",
-  "value_o65",
-  "value_ng"
+let labels_name = [
+  "radar_o60",
+  "radar_u9",
+  "radar_un",
+  "radar_imm",
+  "radar_pov",
+  "radar_h",
+  "radar_e1",
+  "radar_g",
+  "radar_a",
+  "radar_acc_pt",
+  "radar_intersection_density",
+  "radar_road_density",
+  "radar_accidents",
+  "radar_pt_usage",
+  "radar_irr_pt_usage",
+  "radar_dur30",
+  "radar_freq"
+
 ]
 
 var radar;
@@ -37,24 +35,26 @@ var averages;
 function radarPlot(e) {
   currentLayer = e.target;
   var properties = currentLayer.feature.properties;
+  var propertyNames = Object.keys(properties).filter(key => typeof properties[key] === 'number').filter(name => properties[name] <= 1000);
+  var labels = propertyNames.map(name => {
+    // Split the name at the "[" sign and take the first part
+    return name.split('[')[0].trim(); // trim() is used to remove any leading or trailing spaces
+  });
 
   const config = {
     type: 'radar',
     data: {
-      labels: labels.map(x => {
+      labels: labels_name.map(x => {
         // Tries to find the string "radar_<variable_name>" in the translation
         // If not found, just ask for the translation of <variable_name>
-        let varName = x.split("value_")[1];
-        let tS = translateString("radar_" + varName);
-        if (tS == "radar_" + varName || tS == "") {
-          tS = translateString(varName);
-        }
+          tS = translateString(x);
+
         return tS;
       }),
       datasets: [
         {
-          label: properties.name,
-          data: labels.map(x => properties[x]),
+          label: properties['alt_name_f'],
+          data: propertyNames.map(x =>  normalizeValue(properties[x], minMaxValues[x].min, minMaxValues[x].max)),
           fill: true,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgb(255, 99, 132)',
@@ -65,8 +65,8 @@ function radarPlot(e) {
           pointHoverBorderColor: 'rgb(255, 99, 132)'
         },
         {
-          label: translateString("avg_munich"),
-          data: labels.map(x => averages[x]),
+          label: translateString("avg_tunis"),
+          data: propertyNames.map(x => normalizeValue(averages[x], minMaxValues[x].min, minMaxValues[x].max)),
           fill: true,
           backgroundColor: 'rgba(150, 150, 150, 0.2)',
           borderColor: 'rgb(150, 150, 150)',
@@ -109,7 +109,9 @@ function radarPlot(e) {
         }
       },
       locale: document.querySelector("[data-i18n-switcher]").value
+
     },
+
   };
 
   return new Chart(document.getElementById('radar'), config);
@@ -120,10 +122,72 @@ function setAverage(data) {
   averages = found.properties;
 }
 
+
+function setAveragesForAllProperties(data) {
+  let propertySums = {};
+  let propertyCounts = {};
+
+  data.features.forEach(feature => {
+    Object.keys(feature.properties).forEach(propertyName => {
+      let value = feature.properties[propertyName];
+      // Check if the property value is numeric
+      if (typeof value === 'number') {
+        // Initialize if not already done
+        if (!propertySums.hasOwnProperty(propertyName)) {
+          propertySums[propertyName] = 0;
+          propertyCounts[propertyName] = 0;
+        }
+        // Accumulate values and counts
+        propertySums[propertyName] += value;
+        propertyCounts[propertyName]++;
+      }
+    });
+  });
+
+  // Calculate averages
+  let averagest = {};
+  Object.keys(propertySums).forEach(propertyName => {
+    averagest[propertyName] = propertySums[propertyName] / propertyCounts[propertyName];
+  });
+
+   averages=averagest;
+}
+
+var minMaxValues = {};
+
+function setAveragesAndMinMaxForAllProperties(data) {
+
+  // Initialize min and max tracking
+  data.features.forEach(feature => {
+    Object.keys(feature.properties).forEach(propertyName => {
+      let value = feature.properties[propertyName];
+      // Check if the property value is numeric
+      if (typeof value === 'number') {
+        if (!minMaxValues.hasOwnProperty(propertyName)) {
+          minMaxValues[propertyName] = { min: Infinity, max: -Infinity };
+        }
+        // Initialize sums and counts if not already done
+        // Accumulate values and counts
+        // Update min and max values
+        if (value < minMaxValues[propertyName].min) minMaxValues[propertyName].min = value;
+        if (value > minMaxValues[propertyName].max) minMaxValues[propertyName].max = value;
+      }
+
+    });
+  });
+
+
+}
+
+function normalizeValue(value, min, max) {
+  return (value - min) / (max - min);
+}
+
 function handleJsonRadar(data) {
   biv = false;
 
-  setAverage(data);
+  //setAverage(data);
+  setAveragesForAllProperties(data);
 
   // Add data to download button
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
@@ -135,7 +199,6 @@ function handleJsonRadar(data) {
       alert('Error while querying, no features found.');
       return;
   }
-
   function style(feature) {
       return {
           fillColor: '#e8ae43',
@@ -169,6 +232,8 @@ function handleJsonRadar(data) {
 
     // Generate the radar plot
     generateLegend('<div class="radar"><canvas id="radar"></canvas><div i18n="radar_norm" style="font-size:smaller;font-style:italic"></div></div>', true);
+    setAveragesAndMinMaxForAllProperties(data);
+    console.log(minMaxValues)
     radar = radarPlot(e);
   }
 
@@ -186,7 +251,5 @@ function handleJsonRadar(data) {
 
   translatePage();
 
-  // Select one neighbourhood to start with
-  polygonLayer.getLayers().find(layer => layer.feature.properties.name == "Königsplatz").fireEvent('click');
-  map.fitBounds(polygonLayer.getBounds());
+
 }

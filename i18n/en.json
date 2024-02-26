@@ -37,8 +37,8 @@
     "summ": "Neighbourhoods summary",
     "desc_summ": "How just is mobility in my neighborhood?",
 
-    "avg_munich": "Average of Munich",
-    "radar_norm": "This plot shows the different characteristics of the neighborhood in comparison with other neighborhoods in Munich, where 0 means that the neighborhood has the most disadvantaged characterisitcs in the city and 1 means that the neighborhood has the most advantaged characteristics in the city.",
+    "avg_tunis": "Average of Tunis",
+    "radar_norm": "This plot shows the different characteristics of the neighborhood in comparison with other neighborhoods in Grand Tunis, where 0 means that the neighborhood has the most disadvantaged characterisitcs in the city and 1 means that the neighborhood has the most advantaged characteristics in the city.",
 
     "Low": "Low",
     "High": "High",
@@ -69,6 +69,8 @@
     "un": "Unemployed",
     "sp": "Single parents",
     "nc": "People with no car access",
+
+
     
     "pop_integer": "people",
     "pop_percentage": "%",
@@ -80,7 +82,7 @@
     "radar_h": "Health Access",
     "e1": "Education: school",
     "e2": "Education: secondary",
-    "radar_e": "Education Access",
+    "radar_e1": "School Access",
     "f": "Food",
     "radar_f": "Food Access",
     "s": "Sport centers",
@@ -88,7 +90,10 @@
     "g": "Green space",
     "radar_g": "Green Space Access",
     "a": "Administration",
-    "radar_cc": "Community centers Access",
+    "radar_a": "Administration Access",
+
+
+
 
     "select_mot": "Mode of transport",
     "w_700": "Walking, 700m",
@@ -105,11 +110,13 @@
     "pollution": "Pollution (PM 2.5)",
 
     "Accidents/ha/year": "crashes/ha/year",
+    "radar_accidents": "Accidents per year",
 
     "select_ava": "Infrastructure available",
     "acc_pt": "Accessibility to Public Transport",
     "road_density": "Road density",
     "intersection_density": "Street intersections",
+
 
     "% PT stations served in 700m": "% PT stations served in 700m",
     "intersection number/ha": "number/ha",
@@ -125,6 +132,7 @@
     "car_usage": "Car usage",
 
 
+
     "select_temp": "Time",
     "temp": "Schedule",
     "pt_frequ": "Frequency of PT",
@@ -133,11 +141,33 @@
     "dur_30": "Commuting > 30 min",
 
 
+    "radar_o60": "% Older people",
+    "radar_u9": "% Children",
+    "radar_imm": "% Inflow Migrant",
+    "radar_un": "% Unemployed",
+    "radar_pov": "% Poverty rate",
+    "radar_acc_pt": "Public Transport Access",
+    "radar_intersection_density": "Density of street intersection",
+    "radar_road_density": "Density of roads",
+    "radar_dur30": "Commuting > 30 min",
+    "radar_pt_usage": "PT share",
+    "radar_irr_pt_usage": "Irregular PT share",
+    "radar_freq": "Frequency of PT",
+
+
     "desc": "",
     "legend": "Legend",
+    "explain": "Area refers to the build up area (except for road density where it refer to the total area)",
 
     "atlas_authors": "Atlas Authors",
     "atlas_developer": "Developer",
+    "data_source": "Data source",
+    "source1": "Census 2014 INS",
+    "source2": "OpenStreetMap",
+    "source3": "National observatory for road safety",
+    "source4": "Transtu stops position",
+    "source5": "Transtu customer schedule - winter 2023/2024",
+    "ok": "Click here",
 
     "tum": "Technical University of Munich",
     "upm": "Polytechnical University of Madrid",

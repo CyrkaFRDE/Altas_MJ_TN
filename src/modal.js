@@ -165,71 +165,71 @@ function displayModal(welcomeOrAboutUs) {
         // Cat selection
         content.innerHTML += '<div class="cats"><div class="line-wrapper"><hr class="line"><div class="cat-title"></div></div><div class="cat-selection"></div></div>';
         createCatSelection("map_type");
-    } /*else {
+    } else {
         // About
         content.innerHTML = '<p i18n="about_us"></p>'
-        + '<div class="people">'
-        + '<div id="atlas-authors" class="people-group"><h3 i18n="atlas_authors"></h3></div>'
-        + '<div id="atlas-developer" class="people-group"><h3 i18n="atlas_developer"></h3></div>'
-        + '</div>'
-        + '<p i18n="data_source"></p>'
+            + '<p i18n="data_source"></p>' +
+            '<div class="custom-bullets"> <p class="bullet" >  <span i18n="source1"></span><a href="https://www.ins.tn/enquetes/recensement-general-de-la-population-et-de-lhabitat-2014" i18n="ok"></a></p>  <p class="bullet" >  <span i18n="source2"></span></p>  <p class="bullet" >  <span i18n="source3"></span><a href="https://onsr.nat.tn/onsr/index.php?page=0ar" i18n="ok"></a></p> <p class="bullet" >  <span i18n="source4"></span><a href="https://catalog.data.gov.tn/fr/dataset/referentiel-d-arret-de-la-transtu" i18n="ok"></a></p> <p class="bullet" >  <span i18n="source5"></span><a href="https://www.transtu.tn/fr/0113-marche-horaire-hiver-2023-2024.html" i18n="ok"></a></p> </div>'
+
+
         translatePage();
+    }
+    /*
+            let authors = content.querySelector('#atlas-authors');
+            authors.appendChild(createPersonDiv(
+                "David Durán",
+                "tum",
+                "img/david.jpg",
+                "desc_david",
+                {
+                    "fab fa-linkedin": "https://www.linkedin.com/in/david-duran-55336916b",
+                    "fa fa-envelope": "mailto:david.duran@tum.de"
+                }
+            ));
+            authors.appendChild(createPersonDiv(
+                "Sindi Haxhija",
+                "tum",
+                "img/sindi.jpg",
+                "desc_sindi",
+                {
+                    "fab fa-linkedin": "https://www.linkedin.com/in/sindi-haxhija-8a018377/",
+                    "fa fa-envelope": "mailto:sindi.haxhija@tum.de"
+                }
+            ));
+            authors.appendChild(createPersonDiv(
+                "María Teresa Baquero",
+                "upm",
+                "img/maite.jpg",
+                "desc_maite",
+                {
+                    "fab fa-linkedin": "https://www.linkedin.com/in/mar%C3%ADa-teresa-baquero-larriva-42112157/",
+                    "fa fa-envelope": "mailto:maite.baquero@tum.de"
+                }
+            ));
 
-        let authors = content.querySelector('#atlas-authors');
-        authors.appendChild(createPersonDiv(
-            "David Durán",
-            "tum",
-            "img/david.jpg",
-            "desc_david",
-            {
-                "fab fa-linkedin": "https://www.linkedin.com/in/david-duran-55336916b",
-                "fa fa-envelope": "mailto:david.duran@tum.de"
-            }
-        ));
-        authors.appendChild(createPersonDiv(
-            "Sindi Haxhija",
-            "tum",
-            "img/sindi.jpg",
-            "desc_sindi",
-            {
-                "fab fa-linkedin": "https://www.linkedin.com/in/sindi-haxhija-8a018377/",
-                "fa fa-envelope": "mailto:sindi.haxhija@tum.de"
-            }
-        ));
-        authors.appendChild(createPersonDiv(
-            "María Teresa Baquero",
-            "upm",
-            "img/maite.jpg",
-            "desc_maite",
-            {
-                "fab fa-linkedin": "https://www.linkedin.com/in/mar%C3%ADa-teresa-baquero-larriva-42112157/",
-                "fa fa-envelope": "mailto:maite.baquero@tum.de"
-            }
-        ));
 
-
-        let developer = content.querySelector('#atlas-developer');
-        developer.appendChild(createPersonDiv(
-            "Héctor Ochoa‑Ortiz",
-            "unicam",
-            "img/hector.jpg",
-            "desc_hector",
-            {
-                "fab fa-linkedin": "https://www.linkedin.com/in/hector-ochoa-ortiz",
-                "fab fa-github": "https://github.com/Robot8A",
-                "fa fa-globe": "https://pros.unicam.it/members/",
-                "fa fa-envelope": "mailto:hector.ochoa@tum.de"
-            }
-        ));
-    }*/
+            let developer = content.querySelector('#atlas-developer');
+            developer.appendChild(createPersonDiv(
+                "Héctor Ochoa‑Ortiz",
+                "unicam",
+                "img/hector.jpg",
+                "desc_hector",
+                {
+                    "fab fa-linkedin": "https://www.linkedin.com/in/hector-ochoa-ortiz",
+                    "fab fa-github": "https://github.com/Robot8A",
+                    "fa fa-globe": "https://pros.unicam.it/members/",
+                    "fa fa-envelope": "mailto:hector.ochoa@tum.de"
+                }
+            ));
+        }*/
     modal_about.style.display = "block";
     translatePage();
 }
 
 // When About button is clicked, show About modal
-/*about_us_btn.onclick = (event) => {
+about_us_btn.onclick = (event) => {
     displayModal(false);
-}*/
+}
 
 // When X button is clicked, close the modal
 span.onclick = function() {

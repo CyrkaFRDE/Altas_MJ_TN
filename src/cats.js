@@ -67,6 +67,10 @@ var selector_values_before_sp_0 = [
         "value": "ji_v_sg",
         "desc": "desc_ji_v_sg"
     },
+    {
+        "value": "summ",
+        "desc": "desc_summ"
+    },
     /*{
         "value": "diff_sg",
         "desc": "desc_diff_sg"
@@ -180,7 +184,9 @@ var selector_values_after_sp_0 = {
                 "desc": "desc"
             }
         ]
-    }
+    },
+    "summ": {}
+
 }
 var selector_values_after_sp_1 = {
     "sg": {},
@@ -708,9 +714,9 @@ var selector_values_after_sp_1 = {
                         "desc": "desc"
                     }
                 ]
-            }
+            },
+            "summ":{},
         }
-
     }
 }
 
