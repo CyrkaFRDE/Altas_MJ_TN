@@ -333,6 +333,13 @@ div.select-title-info:hover>span.info-tooltip {
     order: 1;
     display: flex;
 }
+
+@media (max-width: 450px) {    
+    h1 {
+        font-size: 1.2em;
+    }
+}
+
 .logo {
     order: 0;
     font-size: 0.75rem;
@@ -346,11 +353,6 @@ div.select-title-info:hover>span.info-tooltip {
     -webkit-padding-before: 1.25rem;
     padding-block-start: 1.25rem;
     text-decoration: none !important;
-}
-@media (max-width: 450px) {    
-    h1 {
-        font-size: 1.2em;
-    }
 }
 
 .logo span.visually-hidden {
