@@ -84,7 +84,7 @@
     "a": "Administration",
     "radar_a": "Accès à une Administration",
     "f": "Biens alimentaires",
-
+    "radar_norm": "Ce graphique montre les différentes caractéristiques de la délégation par rapport aux autres délégations du Grand Tunis, où 0 signifie que la délégation a les caractéristiques les plus défavorisées de la ville et 1 signifie que la délégation a les caractéristiques les plus favorisées de la ville",
 
     "select_exp": "Les risques au voisinage",
     "accidents": "Accidents routiers",
@@ -145,13 +145,6 @@
     "source4": "Transtu position des arrêts",
     "source5": "Transtu planning - Hiver 2023/2024",
     "ok": "Cliquer ici",
-
-
-    "atlas_authors": "Atlas Auteurs",
-    "atlas_developer": "Développeur",
-    "tum": "Technical University of Munich",
-    "unicam": "University of Camerino",
-
-    "desc_david": "Postdoc at the Chair of Urban Structure and Transport Planning at the Technical University of Munich and head of the Mobility Equity Research Group. His dissertation topic was Efficiency and/or Equity? Understanding and planning bikesharing based on spatial fairness. He is a graduate of the International Master's Program in Transportation Systems at the Technical University of Munich and has a background in civil engineering. His research focuses on raising awareness and assessing and addressing mobility inequities. His main methods are mixed-methods approaches, combining spatial analysis and machine learning with qualitative techniques.",
-    "desc_hector": "Interdisciplinary researcher and geodata engineer. Holds a B.Eng. in Informatics from University of Zaragoza (ES), and a Erasmus Mundus M.Sc. in Cartography from TU Munich (DE), TU Wien (AT), TU Dreden (DE), UTwente (NL). Worked with TUM for 7 months as a project assistant (freelance), 4 of which developing this web atlas.\nCurrently Early Stage Researcher (ESR) at the University of Camerino (IT), for the ODECO H2020-MSCA-ITN-2020 project."
+    "tum": "Technical University of Munich"
 }
+  
