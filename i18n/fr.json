@@ -39,7 +39,7 @@
 
     "Low": "Faible",
     "High": "Elevé",
-    "desc_biv": "Les délégations critiques sont celles qui présentent une valeur sociale élevée et une variable de mobilité faibme",
+    "desc_biv": "Les délégations critiques sont celles qui présentent une valeur sociale élevée et une variable de mobilité faible",
     "desc_biv2": "Les délégations critiques sont celles qui présentent une valeur critique pour les deux variables",
 
     "select_sg": "Groupes sociaux",
@@ -64,7 +64,7 @@
     "u19": "Adolescente",
     "imm": "Migrants entrants",
     "un": "Chomeurs",
-    "nc": "Personnes sans accès à une voiture",
+    "nc": "Sans voiture personnelle",
 
     "pop_integer": "Personnes",
     "pop_percentage": "%",
