@@ -48,13 +48,13 @@ function handleJsonBiv(data) {
         let v2_critical = biv_quart_X;
         if (v1 < v1_critical) {
             if (v2 < v2_critical) {
-                return '#574249';
+                return '#64acbe';
             } else {
                 return '#e8e8e1';
             }
         } else {
             if (v2 >= v2_critical) {
-                return '#64acbe';
+                return '#574249';
             } else {
                 return '#c85a5a';
             }
@@ -79,8 +79,8 @@ function handleJsonBiv(data) {
         '<g transform="translate(15 30) rotate(-45)">' +
         '<title>Bivariate legend</title>' +
         '<rect height="18" width="18" y="2" x="0" stroke="#000" fill="' + '#e8e8e1' + '"/>' + //low social  high
-        '<rect height="18" width="18" y="2" x="18" stroke="#000" fill="' + '#64acbe' + '"/>' + //high high
-        '<rect height="18" width="18" y="20" x="0" stroke="#000" fill="' + '#574249' + '"/>' + //low low
+        '<rect height="18" width="18" y="2" x="18" stroke="#000" fill="' + '#574249' + '"/>' + //high high
+        '<rect height="18" width="18" y="20" x="0" stroke="#000" fill="' + '#64acbe' + '"/>' + //low low
         '<rect height="18" width="18" y="20" x="18" stroke="#000" fill="' + '#c85a5a' + '"/>' +
         '<path d="M0,0 v38" opacity="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke="#000" stroke-width="2" fill="none"' + ((getCritical(biv_quart_X) == 'High') ? ' marker-start="url(#arrow)"' : ' marker-end="url(#arrow)"') + '/>' +
         '<path d="M0,38 h38" opacity="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke="#000" stroke-width="2" fill="none"' + ((getCritical(biv_quart_pop) == 'Low') ? ' marker-start="url(#arrow)"' : ' marker-end="url(#arrow)"') + '/>' +
@@ -95,7 +95,7 @@ function handleJsonBiv(data) {
         '<text font-size="0.4em" transform="translate(45, 82)" text-anchor="start" i18n="High"></text>' +
         '</g>' +
         '</svg>'+
-        '<div style="width:220px;"><span i18n="desc_biv" style="font-size:smaller;"></span> (<i class="square" style="display:inline-block;float:none;margin:0;background:' + '#e8e8e8' + '" ></i>)</div>',
+        '<div style="width:220px;"><span i18n="desc_biv" style="font-size:smaller;"></span> (<i class="square" style="display:inline-block;float:none;margin:0;background:' + '#c85a5a' + '" ></i>)</div>',
         false);
     }
     else{
@@ -103,10 +103,10 @@ function handleJsonBiv(data) {
             '<defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>' +
             '<g transform="translate(15 30) rotate(-45)">' +
             '<title>Bivariate legend</title>' +
-            '<rect height="18" width="18" y="2" x="0" stroke="#000" fill="' + '#c85a5a' + '"/>' + //low high
-            '<rect height="18" width="18" y="2" x="18" stroke="#000" fill="' + '#64acbe' + '"/>' + //high high
-            '<rect height="18" width="18" y="20" x="0" stroke="#000" fill="' + '#574249' + '"/>' + //low low
-            '<rect height="18" width="18" y="20" x="18" stroke="#000" fill="' + '#e8e8e8' + '"/>' +
+            '<rect height="18" width="18" y="2" x="0" stroke="#000" fill="' + '#e8e8e1' + '"/>' + //low social  high
+            '<rect height="18" width="18" y="2" x="18" stroke="#000" fill="' + '#574249' + '"/>' + //high high
+            '<rect height="18" width="18" y="20" x="0" stroke="#000" fill="' + '#64acbe' + '"/>' + //low low
+            '<rect height="18" width="18" y="20" x="18" stroke="#000" fill="' + '#c85a5a' + '"/>' +
             '<path d="M0,0 v38" opacity="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke="#000" stroke-width="2" fill="none"' + ((getCritical(biv_quart_X) == 'High') ? ' marker-start="url(#arrow)"' : ' marker-end="url(#arrow)"') + '/>' +
             '<path d="M0,38 h38" opacity="1" stroke-linecap="butt" stroke-linejoin="bevel" stroke="#000" stroke-width="2" fill="none"' + ((getCritical(biv_quart_pop) == 'Low') ? ' marker-start="url(#arrow)"' : ' marker-end="url(#arrow)"') + '/>' +
             '<text font-weight="bold" font-size="0.4em" transform="translate(-10, 18) rotate(90)" text-anchor="middle" i18n="' + selected_values["amenity"] + '"></text>' +
@@ -120,8 +120,9 @@ function handleJsonBiv(data) {
             '<text font-size="0.4em" transform="translate(45, 82)" text-anchor="start" i18n="High"></text>' +
             '</g>' +
             '</svg>'+
-            '<div style="width:220px;"><span i18n="desc_biv2" style="font-size:smaller;"></span> (<i class="square" style="display:inline-block;float:none;margin:0;background:' + '#64acbe' + '" ></i>)</div>',
-            false);}
+            '<div style="width:220px;"><span i18n="desc_biv" style="font-size:smaller;"></span> (<i class="square" style="display:inline-block;float:none;margin:0;background:' +  '#574249' + '" ></i>)</div>',
+            false);
+    }
 
 
     // Add layer to map
