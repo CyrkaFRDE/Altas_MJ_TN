@@ -60,10 +60,10 @@ function selectFeaturesWithTwoProperties(geojson, firstPropertyName, secondPrope
             "geometry": feature.geometry,
             "properties": {
                 // Include only the specified properties
-                ["Mob"]: feature.properties[firstPropertyName],
-                ["Social"]: feature.properties[secondPropertyName],
-                "Unit_mobil": extractStringInBrackets(firstPropertyName),
-                "Unit_social": extractStringInBrackets(secondPropertyName),
+                ["Mob"]: feature.properties[secondPropertyName],
+                ["Social"]: feature.properties[firstPropertyName],
+                "Unit_mobil": extractStringInBrackets(secondPropertyName),
+                "Unit_social": extractStringInBrackets(firstPropertyName),
                 "Delegation": feature.properties.alt_name_f
             }
         }))
