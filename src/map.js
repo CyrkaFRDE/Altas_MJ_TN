@@ -230,7 +230,7 @@ function changeMap() {
                 propertyName=" Unemployed [%]";
             }
             else if ( selected_values["v1"] == "income" ) {//CYRINE
-                propertyName="poverty rate";
+                propertyName="Poverty rate [%]";
             }
             else if ( selected_values["v1"] == "u9" ) {//CYRINE
                 propertyName="Children [%]";
