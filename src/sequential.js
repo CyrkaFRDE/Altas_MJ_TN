@@ -22,14 +22,20 @@ function handleJsonSeq(data,name) {
     var quants = getQuants(data,"Value");
     
     // Generate style from quantiles
+    if (selected_values['justice']=="acc"|selected_values['justice']=="ava"){ function getColor(d) {
+        return  d > quants["Q3"] ? '#fef0d9' :
+            d > quants["Q2"] ?  '#fdcc8a' :
+                d > quants["Q1"] ? '#fc8d59' :
+                    '#d7301f'  ;
+    }
+    }else{
     function getColor(d) {
         return  d > quants["Q3"] ? '#d7301f' :
                 d > quants["Q2"] ? '#fc8d59' :
                 d > quants["Q1"] ? '#fdcc8a' :
                 '#fef0d9';
     }
-    console.log(quants)
-
+    }
 
     var unit= extractStringInBrackets(name);
     function style(feature) {
